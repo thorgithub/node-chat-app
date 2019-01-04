@@ -13,15 +13,26 @@ app.use(express.static(publicPath));
 
 io.on('connection',(socket)=>{
     console.log('connection established from server....');    
-
+    
+    
     socket.emit('newMessage',{
-        from:'pk@example.com',
-        text:'hey! from the server...',
-        completedAt:123
+        from:'Admin',
+        text:'welcome! to the chat Room'
+    })
+
+    socket.broadcast.emit('newMessage',{
+        from:'Admin',
+        text:'new user joined'
     })
 
     socket.on('createMessage',(msg)=>{
-        console.log(msg)
+        // console.log(msg)
+        io.emit('newMessage',{
+            from:msg.from,
+            text:msg.text,
+            createAt: new Date( )
+        });
+
     })
 
 
