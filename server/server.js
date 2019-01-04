@@ -2,6 +2,7 @@ const path = require('path');
 const http = require('http');
 const socketIO = require('socket.io');
 const express = require('express');
+const {generateMessage,generateLocationMessage} = require('./utils/message');
 
 const publicPath = path.join(__dirname , '..' , 'public');
 const port = process.env.PORT || 3000;
@@ -15,32 +16,24 @@ io.on('connection',(socket)=>{
     console.log('connection established from server....');    
     
     
-    socket.emit('newMessage',{
-        from:'Admin',
-        text:'welcome! to the chat Room'
-    })
+    socket.emit('newMessage',generateMessage('Admin','welcome! to the chat Room'));
 
-    socket.broadcast.emit('newMessage',{
-        from:'Admin',
-        text:'new user joined'
-    })
+    socket.broadcast.emit('newMessage',generateMessage('Admin','new user joined'));
 
     socket.on('createMessage',(msg)=>{
-        // console.log(msg)
-        io.emit('newMessage',{
-            from:msg.from,
-            text:msg.text,
-            createAt: new Date( )
-        });
+        io.emit('newMessage',generateMessage(msg.from,msg.text));
+
+    });
+
+    socket.on('createLocationMesssage',(msg)=>{
+        io.emit('newLocationMessage',generateLocationMessage('Admin',msg.latitude,msg.longitude));
 
     })
-
 
     socket.on('disconnect',()=>{
         console.log('Disconnected ..... server');
-    })  
+    });  
 })
-
 
 
 server.listen(port,()=>{
