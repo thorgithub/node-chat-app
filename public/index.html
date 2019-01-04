@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
 </head>
+
 <body class="chat">
     <!-- <h1>NODE CHAT APP</h1> -->
 
@@ -17,20 +19,22 @@
 
     <div class="chat__main">
 
-     <ol class="chat__messages"></ol>
+        <ol class="chat__messages"></ol>
         <div class="chat__footer">
-    <form action="" id="message-form" method="">
-        <input name="message" type="text" placeholder="Enter text" autofocus autocomplete="off"> 
-        <button id="btn">SEND</button>
-    </form>
-    <button id="send-location">Send location</button>
-</div>
+            <form action="" id="message-form" method="">
+                <input name="message" type="text" placeholder="Enter text" autofocus autocomplete="off">
+                <button id="btn">SEND</button>
+            </form>
+            <button id="send-location">Send location</button>
+        </div>
 
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
-<script src="./js/libs/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+    <script src="./js/libs/jquery.min.js"></script>
+    <script src="./js/libs/moment.js"></script>
+    <script src="/js/index.js"></script>
 
 </body>
+
 </html>
